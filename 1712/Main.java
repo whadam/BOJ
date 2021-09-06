@@ -1,31 +1,21 @@
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) {
-        int bep = 1, a, b, c;
+        int n, cnt = 1, cmp = 1;
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
 
         try {
-            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(br.readLine());
 
-            a = Integer.parseInt(st.nextToken());
-            b = Integer.parseInt(st.nextToken());
-            c = Integer.parseInt(st.nextToken());
-
-            if (b >= c) {
-                bep = -1;
-            }
-            else {
-                while (a >= (c-b) * bep) {
-                    bep++;
-                }
+            while (cmp < n) {
+                cmp += cnt*6;
+                cnt++;
             }
 
-            bw.write(Integer.toString(bep));
+            bw.write(Integer.toString(cnt));
             bw.close();
         }
         catch (IOException e) {
