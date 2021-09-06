@@ -1,23 +1,35 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int cnt = 1;
+        int n, cnt;
         String str;
+        int[] arr = new int[26];
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         try{
-            str = br.readLine();
+            n = Integer.parseInt(br.readLine());
+            cnt = n;
 
-            for (int i = 1; i < str.length(); i++) {
-                cnt++;
+            for (int i = 0; i < n; i++) {
+                str = br.readLine();
+                Arrays.fill(arr, 0);
 
-                if (i > 1 && str.charAt(i) == '=' && str.substring(i-2,i).equals("dz")) cnt -= 2;
-                else if (str.charAt(i) == '=' && (str.charAt(i-1) == 'c' || str.charAt(i-1) == 's' || str.charAt(i-1) == 'z')) cnt--;
-                else if (str.charAt(i) == '-' && (str.charAt(i-1) == 'c' || str.charAt(i-1) == 'd')) cnt--;
-                else if (str.charAt(i) == 'j' && (str.charAt(i-1) == 'l' || str.charAt(i-1) == 'n')) cnt--;
+                for(int j = 0; j < str.length(); j++) {
+                    if (j > 0 && str.charAt(j) == str.charAt(j-1)) {
+                        continue;
+                    }
+                    if (arr[str.charAt(j)-97] == 0) {
+                        arr[str.charAt(j)-97]++;
+                    }
+                    else {
+                        cnt--;
+                        break;
+                    }
+                }
             }
 
             bw.write(Integer.toString(cnt));
