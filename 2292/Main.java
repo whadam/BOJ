@@ -10,7 +10,7 @@ public class Main {
         try {
             n = Integer.parseInt(br.readLine());
 
-            while (cmp < n) {
+            while (cmp < n){
                 cmp += cnt*6;
                 cnt++;
             }
