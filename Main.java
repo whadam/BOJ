@@ -13,7 +13,6 @@ public class Main {
 
             for (int i = 1; i < str.length(); i++) {
                 cnt++;
-
                 if (i > 1 && str.charAt(i) == '=' && str.substring(i-2,i).equals("dz")) cnt -= 2;
                 else if (str.charAt(i) == '=' && (str.charAt(i-1) == 'c' || str.charAt(i-1) == 's' || str.charAt(i-1) == 'z')) cnt--;
                 else if (str.charAt(i) == '-' && (str.charAt(i-1) == 'c' || str.charAt(i-1) == 'd')) cnt--;
