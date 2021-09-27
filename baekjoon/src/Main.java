@@ -1,39 +1,26 @@
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
-    static int[][] tri;
-    static int[][] cost;
+    static int n, min = Integer.MAX_VALUE;
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     public static void main(String[] args) throws IOException {
-        int n, i, j;
-        StringTokenizer st;
+        int i;
 
         n = Integer.parseInt(br.readLine());
-        tri = new int[n][n];
-        cost = new int[n][n];
 
-        for (i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine());
+        calc(1);
 
-            for (j = 0; j < i+1; j++) {
-                tri[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-
-
-        bw.write(calc(n-1) + "");
+        bw.write(min + "");
         bw.close();
     }
 
-    static int calc(int n) {
-        int max = Integer.MIN_VALUE;
+    static int calc(int val) {
 
 
 
-        return max;
+        return 0;
     }
 }
