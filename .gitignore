@@ -1,5 +1,3 @@
-*.*
-
-!*.cpp
-!.gitignore
-!.editorconfig
+Debug/
+x64/
+.vs/
