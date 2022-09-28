@@ -1,14 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int* tmp;
+int *tmp, save_count, K, k;
 
 // p = arr1 start point, q = arr2 start point, r = arr end point
 void merge(int* A, int p, int q, int r)
 {
-	// i = arr1 index, j = arr2 index, t = ?
-	int i = p, j = q + 1, t = 1;
+	// i = arr1 index, j = arr2 index, t = tmp arr index
+	int i = p, j = q + 1, t = 0;
 
+	// sort ascending
 	while (i <= q && j <= r)
 	{
 		if (A[i] <= A[j])
@@ -16,14 +17,21 @@ void merge(int* A, int p, int q, int r)
 		else
 			tmp[t++] = A[j++];
 	}
+	// one arr finished, the other arr sort
 	while (i <= q)
 		tmp[t++] = A[i++];
 	while (j <= r)
 		tmp[t++] = A[j++];
+	// copy temp to A
 	i = p;
-	t = 1;
+	t = 0;
 	while (i <= r)
+	{
 		A[i++] = tmp[t++];
+		save_count++;
+		if (save_count == K)
+			k = tmp[t-1];
+	}
 }
 
 void merge_sort(int* A, int p, int r)
@@ -39,11 +47,12 @@ void merge_sort(int* A, int p, int r)
 
 int main()
 {
-	int N, K, *A, i;
+	int N, *A, i;
 	
 	cin >> N >> K;
 	A = new int[N];
 	tmp = new int[N];
+	save_count = 0;
 
 	for (i = 0; i < N; i++)
 	{
@@ -52,10 +61,7 @@ int main()
 
 	merge_sort(A, 0, N - 1);
 
-	for (i = 0; i < N; i++)
-	{
-		cout << A[i] << " ";
-	}
+	cout << (save_count < K ? -1 : k);
 
 	delete[] A, tmp;
 	return 0;
