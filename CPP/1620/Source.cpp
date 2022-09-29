@@ -6,33 +6,35 @@ using namespace std;
 int main()
 {
 	int N, M, i;
-	unordered_map<string, string> map;
-	string str, *arr;
+	unordered_map<string, int> map;
+	string str, * arr, * strArray;
 
 	cin >> N >> M;
 	arr = new string[M];
+	strArray = new string[N];
 
 	for (i = 0; i < N; i++)
 	{
 		cin >> str;
-		map.insert(pair<string, string>(str, to_string(i + 1)));
-		map.insert(pair<string, string>(to_string(i + 1), str));
+		map.insert(make_pair(str, i+1));
+		strArray[i] = str;
 	}
-
 	for (i = 0; i < M; i++)
 	{
 		cin >> str;
 		arr[i] = str;
 	}
 
-	unordered_map<string, string>::iterator it;
+	unordered_map<string, int>::iterator it;
 	for (i = 0; i < M; i++)
 	{
 		it = map.find(arr[i]);
 		if (it != map.end())
-			cout << it->second << endl;
+			cout << it->second << "\n";
+		else
+			cout << strArray[stoi(arr[i]) - 1] << "\n";
 	}
 
-	delete[] arr;
+	delete[] arr, strArray;
 	return 0;
 }
