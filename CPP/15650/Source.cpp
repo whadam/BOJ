@@ -35,7 +35,7 @@ int main()
 
 	cin >> N >> M;
 	arr = new int[M];
-	visit = new bool[N] {false, };
+	visit = new bool[N];
 
 	DFS(N, M, 0);
 
