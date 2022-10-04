@@ -16,7 +16,7 @@ void DFS(int n, int m, int depth, int at)
 	for (int i = at; i <= n; i++)
 	{
 		arr[depth] = i;
-		DFS(n, m, depth + 1, i + 1);
+		DFS(n, m, depth + 1, i);
 	}
 }
 
