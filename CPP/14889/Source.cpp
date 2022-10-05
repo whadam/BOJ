@@ -7,6 +7,33 @@ bool* matched;
 void calc()
 {
 	int start = 0, link = 0, sub;
+
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = i + 1; j < N; j++)
+		{
+			if (matched[i] && matched[j])
+			{
+				start += S[i][j];
+				start += S[j][i];
+			}
+			else if (!matched[i] && !matched[j])
+			{
+				link += S[i][j];
+				link += S[j][i];
+			}
+		}
+	}
+
+	sub = abs(start - link);
+
+	if (sub == 0)
+	{
+		cout << 0;
+		exit(0);
+	}
+
+	result = min(sub, result);
 }
 
 void matching(int idx, int cnt)
@@ -17,14 +44,13 @@ void matching(int idx, int cnt)
 		return;
 	}
 
-	for (int i = 0; i < N; i++)
+	for (int i = idx; i < N; i++)
 	{
-		for (int j = i + 1; j < N; j++)
+		if (!matched[i])
 		{
-			if (matched[i] && matched[j])
-			{
-
-			}
+			matched[i] = true;
+			matching(i + 1, cnt + 1);
+			matched[i] = false;
 		}
 	}
 }
@@ -47,6 +73,10 @@ int main()
 		for (int j = 0; j < N; j++)
 			cin >> S[i][j];
 	}
+
+	matching(0, 0);
+
+	cout << result;
 
 	for (i = 0; i < N; i++)
 		delete S[i];
