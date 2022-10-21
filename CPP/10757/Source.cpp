@@ -1,12 +1,12 @@
 #include <iostream>
+#include <string>
 using namespace std;
-// 9223372036854775807 9223372036854775808
+
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	bool bCarry;
 	int len1, len2;
 	string str1, str2, str = "";
 	
@@ -22,29 +22,28 @@ int main()
 		str2 = "0" + str2;
 	for (auto c : str1)
 		str += "0";
+	str += "0";
 
 	char sum;
-	for (int i = 0; i < len1; i++)
+	for (int i = len1 - 1; i >= 0; i--)
 	{
-		bCarry = false;
-		sum = str1[i] + str2[i];
+		sum = str1[i] + str2[i] + str[i + 1] - 48 * 3;
 
-		if (sum > 57) // sum > 9
+		if (sum > 9)
 		{
-			
-			bCarry = true;
+			str[i + 1] = sum + 38;
+			str[i] = '1';
 		}
 		else
 		{
-			str += sum;
-			bCarry = false;
-		}
-
-		if (bCarry)
-		{
-
+			str[i + 1] = sum + 48;
 		}
 	}
+
+	if (str[0] == '0')
+		str = str.substr(1, str.length());
+
+	cout << str;
 	
 	return 0;
 }
