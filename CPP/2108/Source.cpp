@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <math.h>
 using namespace std;
 
 int main()
@@ -7,12 +8,13 @@ int main()
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	int n, * v, sum(0), maxCntIdx(0), cnt[8001], nMax(0), nMin(4001);
+	int n, * v, cnt[8001], nMax(-4001), nMin(4001), result;
+	double sum(0);
 
 	cin >> n;
 	v = new int[n];
 	fill(v, v + n, 0);
-	fill(cnt, cnt + 4001, 0);
+	fill(cnt, cnt + 8001, 0);
 
 	for (int i = 0; i < n; i++)
 	{
@@ -26,19 +28,32 @@ int main()
 	
 	sort(v, v + n);
 
-	//
-	if (sum % 2 == 1)
-		cout << sum / n + 1 << '\n';
+	// mean
+	result = round(sum / n);
+	if (result == -0)
+		cout << 0 << '\n';
 	else
-		cout << sum / n << '\n';
+		cout << result << '\n';
 
-	//
+	// median
 	cout << v[n / 2] << '\n';
 
-	//
+	// mode
+	n = 0;
+	int max_mode = *max_element(cnt, cnt + 8001);
+	for (int i = 0; i < 8001; i++)
+	{
+		if (cnt[i] == max_mode)
+		{
+			n++;
+			sum = i - 4000;
+		}
+		if (n == 2)
+			break;
+	}
+	cout << sum << '\n';
 
-
-	//
+	// range
 	cout << nMax - nMin;
 
 	delete[] v;
